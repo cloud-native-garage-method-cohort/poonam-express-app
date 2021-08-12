@@ -3,7 +3,7 @@ kind: Service
 metadata:
   labels:
     app: poonam-express-sample-app
-    app.kubernetes.io/instance: poonam-express-sample-app-instance
+    app.kubernetes.io/instance: poonam-express-sample-app
     app.kubernetes.io/name: poonam-express-sample-app
   name: poonam-express-sample-app
 spec:
@@ -13,7 +13,7 @@ spec:
       protocol: TCP
       targetPort: 3000
   selector:
-    app.kubernetes.io/instance: poonam-express-sample-app-instance
+    app.kubernetes.io/instance: poonam-express-sample-app
     app.kubernetes.io/name: poonam-express-sample-app
   sessionAffinity: None
   type: ClusterIP
