@@ -6,7 +6,7 @@ metadata:
     app.openshift.io/vcs-uri: https://github.com/cloud-native-garage-method-cohort/poonam-express-app.git
   labels:
     app: poonam-express-sample-app
-    app.kubernetes.io/instance: poonam-express-sample-app
+    app.kubernetes.io/instance: poonam-express-sample-app-instance
     app.kubernetes.io/name: poonam-express-sample-app
     app.openshift.io/runtime: js
   name: poonam-express-sample-app
@@ -16,13 +16,13 @@ spec:
   revisionHistoryLimit: 10
   selector:
     matchLabels:
-      app.kubernetes.io/instance: poonam-express-sample-app
+      app.kubernetes.io/instance: poonam-express-sample-app-instance
       app.kubernetes.io/name: poonam-express-sample-app
   template:
     metadata:
       KucreationTimestamp: null
       labels:
-        app.kubernetes.io/instance: poonam-express-sample-app
+        app.kubernetes.io/instance: poonam-express-sample-app-instance
         app.kubernetes.io/name: poonam-express-sample-app
     spec:
       containers:
@@ -42,7 +42,7 @@ spec:
             periodSeconds: 10
             successThreshold: 1
             timeoutSeconds: 1
-          name: poonam-express-sample-app
+          name: poonam-express-app
           ports:
             - containerPort: 3000
               name: http
