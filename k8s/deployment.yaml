@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    app.openshift.io/vcs-ref: 4e1ef7c5a79b9cdd17f473c93220076a2c375b9a
+    app.openshift.io/vcs-uri: https://github.com/cloud-native-garage-method-cohort/poonam-express-app.git
+  labels:
+    app: poonam-express-sample-app
+    app.kubernetes.io/instance: poonam-express-sample-app-instance
+    app.kubernetes.io/name: poonam-express-sample-app
+    app.openshift.io/runtime: js
+  name: poonam-express-sample-app
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: poonam-express-sample-app-instance
+      app.kubernetes.io/name: poonam-express-sample-app
+  template:
+    metadata:
+      KucreationTimestamp: null
+      labels:
+        app.kubernetes.io/instance: poonam-express-sample-app-instance
+        app.kubernetes.io/name: poonam-express-sample-app
+    spec:
+      containers:
+        - env:
+            - name: INGRESS_HOST
+            - name: PROTOCOLS
+            - name: LOG_LEVEL
+              value: debug
+          image: quay.io/poonamzham0/test
+          imagePullPolicy: IfNotPresent
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /
+              port: 3000
+              scheme: HTTP
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          name: poonam-express-sample-app
+          ports:
+            - containerPort: 3000
+              name: http
+              protocol: TCP
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /
+              port: http
+              scheme: HTTP
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30

@@ -1,0 +1,11 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- deployment.yaml
+- service.yaml
+- route.yaml
+commonLabels:
+  app: poonam-express-sample-app
+  app.kubernetes.io/instance: poonam-express-sample-app-instance
+  app.kubernetes.io/name: poonam-express-sample-app
+
